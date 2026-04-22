@@ -75,8 +75,31 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Mobile Optimization */
+@media (max-width: 640px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+
+  input, textarea, button {
+    min-height: 44px;
+  }
+}
+
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+
+  /* Safe area insets for mobile */
+  @supports (padding: max(0px)) {
+    body {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
   }
 }

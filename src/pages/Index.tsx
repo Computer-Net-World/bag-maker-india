@@ -63,10 +63,10 @@ const HomePage = () => (
     </section>
 
     {/* Features */}
-    <section className="py-20 bg-cream">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20 bg-cream">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading title="Why Choose Us" subtitle="Trusted by hundreds of businesses across India for quality, reliability, and value." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
@@ -75,13 +75,13 @@ const HomePage = () => (
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="bg-card rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card rounded-lg p-5 sm:p-8 text-center shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-secondary flex items-center justify-center">
-                <f.icon size={24} className="text-accent" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 mx-auto mb-3 sm:mb-5 rounded-full bg-secondary flex items-center justify-center">
+                <f.icon size={20} className="text-accent sm:text-2xl" />
               </div>
-              <h3 className="font-serif text-xl mb-2">{f.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="font-serif text-lg sm:text-xl mb-2">{f.title}</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -89,10 +89,10 @@ const HomePage = () => (
     </section>
 
     {/* Products */}
-    <section className="py-20">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading title="Our Products" subtitle="Explore our wide range of hand carry bags for every need." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {products.map((p, i) => (
             <motion.div
               key={p.name}
@@ -106,10 +106,10 @@ const HomePage = () => (
               <div className="aspect-square overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy" width={800} height={800} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
-              <div className="p-5">
-                <h3 className="font-serif text-lg">{p.name}</h3>
-                <p className="text-muted-foreground text-sm mt-1">{p.desc}</p>
-                <Link to="/contact" className="inline-block mt-4 text-accent font-semibold text-sm hover:underline">
+              <div className="p-3 sm:p-5">
+                <h3 className="font-serif text-base sm:text-lg">{p.name}</h3>
+                <p className="text-muted-foreground text-xs sm:text-sm mt-1">{p.desc}</p>
+                <Link to="/contact" className="inline-block mt-3 sm:mt-4 text-accent font-semibold text-xs sm:text-sm hover:underline">
                   Enquire Now →
                 </Link>
               </div>
@@ -151,17 +151,17 @@ const HomePage = () => (
     </section>
 
     {/* Quick Contact */}
-    <section className="py-20 bg-earth text-earth-foreground text-center">
-      <div className="container mx-auto px-4 lg:px-8">
-        <h2 className="font-serif text-3xl md:text-4xl mb-4">Ready to Place Your Order?</h2>
-        <p className="text-earth-foreground/70 max-w-xl mx-auto mb-8">
+    <section className="py-12 sm:py-20 bg-earth text-earth-foreground text-center">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-3 sm:mb-4">Ready to Place Your Order?</h2>
+        <p className="text-earth-foreground/70 max-w-xl mx-auto mb-6 sm:mb-8 text-sm sm:text-base">
           Get in touch with us for bulk pricing, custom designs, and fast delivery across India.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/contact" className="bg-accent text-accent-foreground px-8 py-3.5 rounded-md font-semibold hover:brightness-110 transition">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+          <Link to="/contact" className="bg-accent text-accent-foreground px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-md font-semibold hover:brightness-110 transition">
             Contact Us
           </Link>
-          <a href="tel:+919876543210" className="border-2 border-earth-foreground/40 text-earth-foreground px-8 py-3.5 rounded-md font-semibold hover:bg-earth-foreground/10 transition">
+          <a href="tel:+919876543210" className="border-2 border-earth-foreground/40 text-earth-foreground px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-md font-semibold hover:bg-earth-foreground/10 transition">
             Call Now
           </a>
         </div>

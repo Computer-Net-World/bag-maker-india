@@ -41,8 +41,8 @@ const fade = {
 
 const ProductsPage = () => (
   <Layout>
-    <section className="py-20 bg-cream">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20 bg-cream">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading
           title="Our Products"
           subtitle="Explore our complete range of carry bags — crafted for quality and designed for your brand."
@@ -50,8 +50,8 @@ const ProductsPage = () => (
       </div>
     </section>
 
-    <section className="py-20">
-      <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section className="py-12 sm:py-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
         {categories.map((c, i) => (
           <motion.div
             key={c.name}
@@ -65,15 +65,15 @@ const ProductsPage = () => (
             <div className="aspect-[4/3] overflow-hidden">
               <img src={c.img} alt={c.name} loading="lazy" width={800} height={800} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
-            <div className="p-8">
-              <h3 className="font-serif text-2xl mb-3">{c.name}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4">{c.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
+            <div className="p-4 sm:p-8">
+              <h3 className="font-serif text-xl sm:text-2xl mb-2 sm:mb-3">{c.name}</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">{c.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                 {c.sizes.map((s) => (
-                  <span key={s} className="bg-secondary text-secondary-foreground text-xs px-3 py-1 rounded-full">{s}</span>
+                  <span key={s} className="bg-secondary text-secondary-foreground text-xs px-2 sm:px-3 py-1 rounded-full">{s}</span>
                 ))}
               </div>
-              <Link to="/contact" className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-accent transition-colors">
+              <Link to="/contact" className="inline-block bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-2.5 rounded-md text-xs sm:text-sm font-semibold hover:bg-accent transition-colors">
                 Enquire Now
               </Link>
             </div>

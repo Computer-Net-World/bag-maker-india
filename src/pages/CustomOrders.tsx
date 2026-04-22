@@ -25,16 +25,16 @@ const fade = {
 
 const CustomOrdersPage = () => (
   <Layout>
-    <section className="py-20 bg-cream">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20 bg-cream">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading title="Custom Orders" subtitle="Get bags made exactly the way you want — your size, your material, your branding." />
       </div>
     </section>
 
     {/* Options */}
-    <section className="py-20">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section className="py-12 sm:py-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {options.map((o, i) => (
             <motion.div
               key={o.title}
@@ -43,13 +43,13 @@ const CustomOrdersPage = () => (
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="bg-card rounded-lg p-8 text-center shadow-sm"
+              className="bg-card rounded-lg p-5 sm:p-8 text-center shadow-sm"
             >
-              <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-secondary flex items-center justify-center">
-                <o.icon size={24} className="text-accent" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 mx-auto mb-3 sm:mb-5 rounded-full bg-secondary flex items-center justify-center">
+                <o.icon size={20} className="text-accent sm:size-6" />
               </div>
-              <h3 className="font-serif text-xl mb-2">{o.title}</h3>
-              <p className="text-muted-foreground text-sm">{o.desc}</p>
+              <h3 className="font-serif text-lg sm:text-xl mb-2">{o.title}</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">{o.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -57,10 +57,10 @@ const CustomOrdersPage = () => (
     </section>
 
     {/* Process */}
-    <section className="py-20 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20 bg-secondary">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading title="How It Works" subtitle="Our simple 5-step process from your idea to the finished product." />
-        <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-4 sm:gap-6">
           {steps.map((s, i) => (
             <motion.div
               key={s.label}
@@ -71,19 +71,19 @@ const CustomOrdersPage = () => (
               viewport={{ once: true }}
               className="flex-1 text-center relative"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold">
+              <div className="w-14 sm:w-16 h-14 sm:h-16 mx-auto mb-2 sm:mb-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-lg sm:text-xl font-bold">
                 {i + 1}
               </div>
-              <h4 className="font-semibold mb-1">{s.label}</h4>
-              <p className="text-muted-foreground text-sm">{s.desc}</p>
+              <h4 className="font-semibold text-sm sm:text-base mb-1">{s.label}</h4>
+              <p className="text-muted-foreground text-xs sm:text-sm">{s.desc}</p>
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-8 left-[calc(50%+2.5rem)] w-[calc(100%-5rem)] h-px bg-border" />
+                <div className="hidden md:block absolute top-7 sm:top-8 left-[calc(50%+2rem)] sm:left-[calc(50%+2.5rem)] w-[calc(100%-4rem)] sm:w-[calc(100%-5rem)] h-px bg-border" />
               )}
             </motion.div>
           ))}
         </div>
-        <div className="text-center mt-12">
-          <Link to="/contact" className="bg-accent text-accent-foreground px-8 py-3.5 rounded-md font-semibold hover:brightness-110 transition">
+        <div className="text-center mt-8 sm:mt-12">
+          <Link to="/contact" className="bg-accent text-accent-foreground px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-md text-sm sm:text-base font-semibold hover:brightness-110 transition inline-block">
             Start Your Custom Order
           </Link>
         </div>

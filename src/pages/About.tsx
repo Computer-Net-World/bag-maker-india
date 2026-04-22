@@ -19,21 +19,21 @@ const fade = {
 const AboutPage = () => (
   <Layout>
     {/* Hero */}
-    <section className="py-20 bg-cream">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-12 sm:py-20 bg-cream">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
         <SectionHeading title="About CarryBags India" subtitle="India's trusted hand carry bag manufacturer — delivering quality since 2009." />
       </div>
     </section>
 
     {/* Intro */}
-    <section className="py-20">
-      <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="py-12 sm:py-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
         <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <img src={factoryImg} alt="Our manufacturing facility" loading="lazy" width={1200} height={800} className="rounded-lg shadow-md w-full" />
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="font-serif text-3xl mb-6">Built on Quality, Driven by Trust</h2>
-          <div className="space-y-4 text-foreground/80 leading-relaxed">
+          <h2 className="font-serif text-2xl sm:text-3xl mb-4 sm:mb-6">Built on Quality, Driven by Trust</h2>
+          <div className="space-y-3 sm:space-y-4 text-foreground/80 leading-relaxed text-sm sm:text-base">
             <p>
               CarryBags India is one of India's leading manufacturers of premium hand carry bags. Based in Mumbai, we have been serving retailers, wholesalers, and brands across the country for over 15 years.
             </p>
@@ -49,8 +49,8 @@ const AboutPage = () => (
     </section>
 
     {/* Stats */}
-    <section className="py-16 bg-earth text-earth-foreground">
-      <div className="container mx-auto px-4 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="py-12 sm:py-16 bg-earth text-earth-foreground">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
         {stats.map((s, i) => (
           <motion.div
             key={s.label}
@@ -61,25 +61,29 @@ const AboutPage = () => (
             viewport={{ once: true }}
             className="text-center"
           >
-            <s.icon size={28} className="mx-auto mb-3 text-sand" />
-            <p className="font-serif text-3xl md:text-4xl">{s.value}</p>
-            <p className="text-earth-foreground/70 text-sm mt-1">{s.label}</p>
+            <s.icon size={20} className="mx-auto mb-2 sm:mb-3 text-sand" />
+            <p className="font-serif text-2xl sm:text-3xl md:text-4xl">{s.value}</p>
+            <p className="text-earth-foreground/70 text-xs sm:text-sm mt-1">{s.label}</p>
           </motion.div>
         ))}
       </div>
     </section>
 
     {/* Mission & Vision */}
-    <section className="py-20">
-      <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-cream rounded-lg p-10">
-          <h3 className="font-serif text-2xl mb-4">Our Mission</h3>
+    <section className="py-12 sm:py-20">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-cream rounded-lg p-6 sm:p-10">
+          <h3 className="font-serif text-xl sm:text-2xl mb-3 sm:mb-4">Our Mission</h3>
+          <p className="text-foreground/80 leading-relaxed text-sm sm:text-base">
           <p className="text-foreground/80 leading-relaxed">
             To provide businesses across India with high-quality, eco-friendly carry bags at competitive prices, while supporting sustainable manufacturing practices and empowering local communities.
           </p>
         </motion.div>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-cream rounded-lg p-10">
-          <h3 className="font-serif text-2xl mb-4">Our Vision</h3>
+        </p>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-cream rounded-lg p-6 sm:p-10">
+          <h3 className="font-serif text-xl sm:text-2xl mb-3 sm:mb-4">Our Vision</h3>
+          <p className="text-foreground/80 leading-relaxed text-sm sm:text-base">
           <p className="text-foreground/80 leading-relaxed">
             To become India's most trusted name in carry bag manufacturing — known for innovation, reliability, and an unwavering commitment to quality and sustainability.
           </p>

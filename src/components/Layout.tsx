@@ -4,9 +4,9 @@ import Footer from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
 
 const Layout = ({ children }: { children: ReactNode }) => (
-  <div className="min-h-screen flex flex-col">
+  <div className="min-h-screen flex flex-col overflow-x-hidden">
     <Navbar />
-    <main className="flex-1 pt-16">{children}</main>
+    <main className="flex-1 pt-16 sm:pt-16 w-full">{children}</main>
     <Footer />
     <WhatsAppButton />
   </div>
