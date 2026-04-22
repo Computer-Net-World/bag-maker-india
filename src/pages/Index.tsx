@@ -45,7 +45,7 @@ const HomePage = () => (
       <div className="relative container mx-auto px-4 lg:px-8 py-20">
         <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
           <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-earth-foreground leading-tight">
-            Premium Hand Carry Bags Manufacturer in India
+            Premium Hand Carry Bags Manufacturer in Hathras
           </h1>
           <p className="mt-6 text-earth-foreground/80 text-lg md:text-xl font-light">
             Durable &nbsp;|&nbsp; Customizable &nbsp;|&nbsp; Bulk Orders Available
