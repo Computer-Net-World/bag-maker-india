@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
         <Link to="/" className="font-serif text-2xl text-primary tracking-tight">
-          CarryBags<span className="text-accent">India</span>
+          Siya Ram<span className="text-accent"> Enterprises</span>
         </Link>
 
         {/* Desktop */}
