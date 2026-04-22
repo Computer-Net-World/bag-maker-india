@@ -59,17 +59,17 @@ const ContactPage = () => {
             <div>
               <h3 className="font-serif text-2xl mb-6">Get In Touch</h3>
               <div className="space-y-5">
-                <a href="tel:+919876543210" className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors">
+                <a href="tel:+919368400659" className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors">
                   <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0"><Phone size={18} className="text-accent" /></div>
-                  <span>+91 98765 43210</span>
+                  <span>+91 93684 00659</span>
                 </a>
-                <a href="mailto:info@carrybagsindia.com" className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors">
+                <a href="mailto:siyaramenterprises211@gmail.com" className="flex items-center gap-3 text-foreground/80 hover:text-accent transition-colors">
                   <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0"><Mail size={18} className="text-accent" /></div>
-                  <span>info@carrybagsindia.com</span>
+                  <span>siyaramenterprises211@gmail.com</span>
                 </a>
                 <div className="flex items-center gap-3 text-foreground/80">
                   <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0"><MapPin size={18} className="text-accent" /></div>
-                  <span>Mumbai, Maharashtra, India</span>
+                  <span> Near Maa sumitra rasoi, Gaushala Rd, Nagla Emliya, Hathras, UP </span>
                 </div>
               </div>
             </div>
@@ -87,8 +87,8 @@ const ContactPage = () => {
             <div className="rounded-lg overflow-hidden border border-border aspect-video bg-muted flex items-center justify-center">
               <iframe
                 title="Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                width="100%"
+              src="https://www.google.com/maps?q=Hathras,Uttar+Pradesh&output=embed"
+    width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
