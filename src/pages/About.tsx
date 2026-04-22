@@ -75,16 +75,12 @@ const AboutPage = () => (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-cream rounded-lg p-6 sm:p-10">
           <h3 className="font-serif text-xl sm:text-2xl mb-3 sm:mb-4">Our Mission</h3>
           <p className="text-foreground/80 leading-relaxed text-sm sm:text-base">
-          <p className="text-foreground/80 leading-relaxed">
             To provide businesses across India with high-quality, eco-friendly carry bags at competitive prices, while supporting sustainable manufacturing practices and empowering local communities.
           </p>
-        </motion.div>
-        </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-cream rounded-lg p-6 sm:p-10">
           <h3 className="font-serif text-xl sm:text-2xl mb-3 sm:mb-4">Our Vision</h3>
           <p className="text-foreground/80 leading-relaxed text-sm sm:text-base">
-          <p className="text-foreground/80 leading-relaxed">
             To become India's most trusted name in carry bag manufacturing — known for innovation, reliability, and an unwavering commitment to quality and sustainability.
           </p>
         </motion.div>
