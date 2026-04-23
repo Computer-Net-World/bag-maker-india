@@ -5,10 +5,10 @@ import SectionHeading from "@/components/SectionHeading";
 import factoryImg from "@/assets/factory.jpg";
 
 const stats = [
-  { icon: Clock, value: "15+", label: "Years of Experience" },
-  { icon: Users, value: "500+", label: "Clients Served" },
+  { icon: Users, value: "300+", label: "Clients Served" },
   { icon: Package, value: "10M+", label: "Bags Delivered" },
   { icon: Award, value: "100%", label: "Quality Commitment" },
+  { icon: Clock, value: "5+", label: "Years of Experience" },
 ];
 
 const fade = {
@@ -21,7 +21,7 @@ const AboutPage = () => (
     {/* Hero */}
     <section className="py-12 sm:py-20 bg-cream">
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-        <SectionHeading title="About CarryBags India" subtitle="India's trusted hand carry bag manufacturer — delivering quality since 2009." />
+        <SectionHeading title="About CarryBags India" subtitle="India's trusted hand carry bag manufacturer — delivering quality since 2021." />
       </div>
     </section>
 
@@ -35,7 +35,7 @@ const AboutPage = () => (
           <h2 className="font-serif text-2xl sm:text-3xl mb-4 sm:mb-6">Built on Quality, Driven by Trust</h2>
           <div className="space-y-3 sm:space-y-4 text-foreground/80 leading-relaxed text-sm sm:text-base">
             <p>
-              CarryBags India is one of India's leading manufacturers of premium hand carry bags. Based in Mumbai, we have been serving retailers, wholesalers, and brands across the country for over 15 years.
+              CarryBags India is one of India's leading manufacturers of premium hand carry bags. Based in Mumbai, we have been serving retailers, wholesalers, and brands across the country for over 5 years.
             </p>
             <p>
               Our state-of-the-art manufacturing facility is equipped with modern machinery and staffed by skilled craftsmen who ensure every bag meets the highest standards of durability and finish.

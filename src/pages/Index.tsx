@@ -3,11 +3,10 @@ import { motion } from "framer-motion";
 import { Factory, Paintbrush, Leaf, Truck, Star } from "lucide-react";
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
+import ProductCard from "@/components/ProductCard";
+import { categories, products } from "@/data/products";
+import { testimonials } from "@/data/testimonials";
 import heroBags from "@/assets/hero-bags.jpg";
-import paperBag from "@/assets/paper-bag.jpg";
-import juteBag from "@/assets/jute-bag.jpg";
-import clothBag from "@/assets/cloth-bag.jpg";
-import customBag from "@/assets/custom-bag.jpg";
 
 const features = [
   { icon: Factory, title: "Bulk Manufacturing", desc: "Large-scale production with consistent quality for orders of any size." },
@@ -16,18 +15,8 @@ const features = [
   { icon: Truck, title: "Pan India Delivery", desc: "Reliable shipping to every corner of India — tier 1, 2, and 3 cities." },
 ];
 
-const products = [
-  { img: paperBag, name: "Paper Bags", desc: "Strong, recyclable kraft paper bags in all sizes." },
-  { img: clothBag, name: "Cloth Bags", desc: "Durable cotton and canvas bags for everyday use." },
-  { img: juteBag, name: "Jute Bags", desc: "Natural jute bags, sturdy and eco-conscious." },
-  { img: customBag, name: "Custom Printed Bags", desc: "Fully branded bags with your logo and design." },
-];
-
-const testimonials = [
-  { name: "Rajesh Sharma", city: "Delhi", text: "Excellent quality bags at very competitive pricing. We have been ordering in bulk for our retail chain for 2 years now." },
-  { name: "Priya Mehta", city: "Mumbai", text: "The custom branding options are fantastic. Our customers love the bags — they double as marketing for our brand!" },
-  { name: "Anand Gupta", city: "Jaipur", text: "Timely delivery across all our stores in Rajasthan. Very professional and reliable manufacturer." },
-];
+// Get top 4 featured products
+const featuredProducts = products.slice(0, 4);
 
 const fade = {
   hidden: { opacity: 0, y: 30 },
@@ -88,62 +77,120 @@ const HomePage = () => (
       </div>
     </section>
 
-    {/* Products */}
+    {/* Categories Section */}
     <section className="py-12 sm:py-20">
       <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-        <SectionHeading title="Our Products" subtitle="Explore our wide range of hand carry bags for every need." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-          {products.map((p, i) => (
+        <SectionHeading 
+          title="Product Categories" 
+          subtitle="Explore our 7 main product categories with specialized solutions for every industry."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {categories.map((cat, i) => (
             <motion.div
-              key={p.name}
+              key={cat.id}
               custom={i}
               variants={fade}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="group bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
             >
-              <div className="aspect-square overflow-hidden">
-                <img src={p.img} alt={p.name} loading="lazy" width={800} height={800} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-3 sm:p-5">
-                <h3 className="font-serif text-base sm:text-lg">{p.name}</h3>
-                <p className="text-muted-foreground text-xs sm:text-sm mt-1">{p.desc}</p>
-                <Link to="/contact" className="inline-block mt-3 sm:mt-4 text-accent font-semibold text-xs sm:text-sm hover:underline">
-                  Enquire Now →
-                </Link>
-              </div>
+              <Link
+                to={`/products?category=${cat.id}`}
+                className="group h-full bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all"
+              >
+                <div className="aspect-square overflow-hidden bg-secondary">
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    loading="lazy"
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-4 sm:p-5">
+                  <div className="text-2xl mb-2">{cat.icon}</div>
+                  <h3 className="font-serif text-base sm:text-lg mb-2 group-hover:text-accent transition-colors">
+                    {cat.name}
+                  </h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2">
+                    {cat.description}
+                  </p>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
 
+    {/* Featured Products */}
+    <section className="py-12 sm:py-20 bg-cream">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+        <SectionHeading 
+          title="Featured Products" 
+          subtitle="Check out some of our most popular items. Browse our complete collection on the products page."
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {featuredProducts.map((product, idx) => (
+            <ProductCard key={product.id} product={product} index={idx} />
+          ))}
+        </div>
+        <div className="text-center mt-8 sm:mt-12">
+          <Link
+            to="/products"
+            className="inline-block bg-primary text-primary-foreground px-6 sm:px-8 py-3 rounded-md font-semibold hover:bg-accent transition-colors"
+          >
+            View All Products →
+          </Link>
+        </div>
+      </div>
+    </section>
+
     {/* Testimonials */}
     <section className="py-20 bg-secondary">
-      <div className="container mx-auto px-4 lg:px-8">
-        <SectionHeading title="What Our Clients Say" subtitle="Trusted by retailers, wholesalers, and brands across India." />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+        <SectionHeading title="What Our Clients Say" subtitle="Real feedback from trusted businesses across India who partner with us." />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((t, i) => (
             <motion.div
-              key={t.name}
+              key={t.id}
               custom={i}
               variants={fade}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="bg-card rounded-lg p-8 shadow-sm"
+              className="bg-card rounded-lg p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow flex flex-col"
             >
+              {/* Client Logo & Info */}
+              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-border">
+                <div className="w-16 h-16 rounded-lg bg-cream overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  <img
+                    src={t.clientLogo}
+                    alt={t.clientName}
+                    width={64}
+                    height={64}
+                    className="w-full h-full object-contain p-2"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-base sm:text-lg">{t.clientName}</h3>
+                  <p className="text-muted-foreground text-xs sm:text-sm">{t.businessType}</p>
+                  <p className="text-muted-foreground text-xs text-accent">{t.city}</p>
+                </div>
+              </div>
+
+              {/* Rating */}
               <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
+                {[...Array(t.rating)].map((_, j) => (
                   <Star key={j} size={16} className="fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-foreground/80 text-sm leading-relaxed italic">"{t.text}"</p>
-              <div className="mt-6">
-                <p className="font-semibold text-sm">{t.name}</p>
-                <p className="text-muted-foreground text-xs">{t.city}</p>
-              </div>
+
+              {/* Feedback */}
+              <p className="text-foreground/80 text-xs sm:text-sm leading-relaxed italic flex-grow">
+                "{t.feedback}"
+              </p>
             </motion.div>
           ))}
         </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/siya ram logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -18,8 +19,11 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-14 sm:h-16 px-3 sm:px-4 lg:px-8">
-        <Link to="/" className="font-serif text-lg sm:text-2xl text-primary tracking-tight truncate">
-          Siya Ram<span className="text-accent"> Enterprises</span>
+        <Link to="/" className="flex items-center gap-2 h-full">
+          <img src={logo} alt="Siya Ram Enterprises" className="h-12 sm:h-14 object-contain" />
+          <div className="hidden sm:block font-serif text-sm lg:text-lg text-primary tracking-tight">
+            Siya Ram<span className="text-accent"> Enterprises</span>
+          </div>
         </Link>
 
         {/* Desktop */}

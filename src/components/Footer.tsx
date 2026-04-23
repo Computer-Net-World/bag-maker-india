@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logo from "../assets/siya ram logo 2.png";
 
 const Footer = () => (
   <footer className="bg-earth text-earth-foreground">
     <div className="container mx-auto px-3 sm:px-4 lg:px-8 py-12 sm:py-16">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
         <div>
+          <img src={logo} alt="Siya Ram Enterprises" className="h-32 sm:h-64 object-contain mb-3 sm:mb-4" />
           <h3 className="font-serif text-lg sm:text-2xl mb-3 sm:mb-4">
             Siya Ram <span className="text-sand">Enterprises </span>
           </h3>
