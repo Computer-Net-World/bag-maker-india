@@ -1,22 +1,27 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MessageCircle, ChevronLeft, Check, AlertCircle } from "lucide-react";
+import { MessageCircle, ChevronLeft, Check, Tag, Phone } from "lucide-react";
 import Layout from "@/components/Layout";
-import SectionHeading from "@/components/SectionHeading";
-import { products } from "@/data/products";
+import { mainCategories } from "@/data/products";
 
 const ProductDetail = () => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  const { id } = useParams<{ id: string }>();
 
-  if (!product) {
+  // Find the product across all categories
+  let found: { sub: ReturnType<typeof mainCategories[0]["subcategories"][0]>; cat: typeof mainCategories[0] } | null = null;
+  for (const cat of mainCategories) {
+    const sub = cat.subcategories.find((s) => s.id === id);
+    if (sub) { found = { sub, cat }; break; }
+  }
+
+  if (!found) {
     return (
       <Layout>
-        <section className="py-20 text-center">
+        <section className="py-24 text-center">
           <div className="container mx-auto px-4">
             <h1 className="font-serif text-3xl mb-4">Product Not Found</h1>
             <p className="text-muted-foreground mb-6">The product you're looking for doesn't exist.</p>
-            <Link to="/products" className="inline-block bg-primary text-primary-foreground px-6 py-2.5 rounded-md font-semibold hover:bg-accent transition-colors">
+            <Link to="/products" className="inline-block bg-accent text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-accent/90 transition-colors">
               Back to Products
             </Link>
           </div>
@@ -25,223 +30,213 @@ const ProductDetail = () => {
     );
   }
 
-  const phoneNumber = "919368400659";
-  const whatsappMessage = `Hi, I'm interested in ${product.name} with MOQ of ${product.moq} pieces. Can you provide more details and pricing?`;
-  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  const { sub: product, cat: category } = found;
+  const waMsg = `Hi, I'm interested in "${product.name}" (${category.name}). MOQ: ${product.moq} pcs. Please share pricing and availability.`;
+  const waLink = `https://wa.me/919368400659?text=${encodeURIComponent(waMsg)}`;
+
+  const BADGE_STYLES: Record<string, string> = {
+    "Most Popular": "bg-amber-100 text-amber-800",
+    "Best Seller": "bg-green-100 text-green-800",
+    "New": "bg-blue-100 text-blue-800",
+    "Luxury": "bg-purple-100 text-purple-800",
+    "Trending": "bg-pink-100 text-pink-800",
+    "Eco Pick": "bg-emerald-100 text-emerald-800",
+    "Durable": "bg-slate-100 text-slate-800",
+    "Custom": "bg-orange-100 text-orange-800",
+    "Festival Pick": "bg-red-100 text-red-800",
+    "Value Pick": "bg-teal-100 text-teal-800",
+    "Premium": "bg-indigo-100 text-indigo-800",
+    "Best for Gifting": "bg-rose-100 text-rose-800",
+  };
+
+  const specRows = [
+    { label: "Material",      value: product.specs.material },
+    { label: "GSM",           value: product.specs.gsm },
+    { label: "Weight Capacity", value: product.specs.weight },
+    { label: "Load Capacity", value: product.specs.loadCapacity },
+    { label: "Available Sizes", value: product.specs.sizes?.join(", ") },
+    { label: "Handle Types",  value: product.specs.handles?.join(", ") },
+  ].filter((r) => r.value);
 
   return (
     <Layout>
       {/* Breadcrumb */}
-      <section className="py-4 border-b border-border">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link to="/products" className="hover:text-accent flex items-center gap-1">
-              <ChevronLeft size={16} /> Products
-            </Link>
+      <section className="pt-20 pb-0 border-b border-border bg-white">
+        <div className="container mx-auto px-4 lg:px-8 py-3">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
+            <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+            <span>/</span>
+            <Link to="/products" className="hover:text-accent transition-colors">Products</Link>
+            <span>/</span>
+            <Link to={`/category/${category.id}`} className="hover:text-accent transition-colors">{category.name}</Link>
             <span>/</span>
             <span className="text-foreground font-medium">{product.name}</span>
           </div>
         </div>
       </section>
 
-      {/* Product Details */}
-      <section className="py-12 sm:py-20">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Image Section */}
+      {/* Main product section */}
+      <section className="section-pad bg-[hsl(var(--cream))]">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14">
+
+            {/* Image */}
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <div className="aspect-square overflow-hidden rounded-lg bg-secondary">
+              <div className="relative aspect-square overflow-hidden rounded-2xl bg-white shadow-md border border-border/50">
                 <img
                   src={product.image}
                   alt={product.name}
-                  width={600}
-                  height={600}
                   className="w-full h-full object-cover"
                 />
+                {product.badge && (
+                  <span className={`absolute top-4 left-4 badge-pill ${BADGE_STYLES[product.badge] ?? "bg-gray-100 text-gray-800"} shadow-sm`}>
+                    <Tag size={11} /> {product.badge}
+                  </span>
+                )}
               </div>
-              <div className="mt-4 flex gap-2">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="w-16 h-16 rounded-md overflow-hidden bg-secondary cursor-pointer hover:opacity-70 transition-opacity">
-                    <img src={product.image} alt={`${product.name} view ${i + 1}`} className="w-full h-full object-cover" />
+
+              {/* Customization options */}
+              <div className="grid grid-cols-4 gap-2 mt-4">
+                {[
+                  { icon: "📏", label: "Size" },
+                  { icon: "🎨", label: "Color" },
+                  { icon: "🖨️", label: "Print" },
+                  { icon: "🔗", label: "Handle" },
+                ].map((opt) => (
+                  <div key={opt.label} className="bg-white rounded-xl p-3 text-center border border-border/50 shadow-sm">
+                    <div className="text-2xl mb-1">{opt.icon}</div>
+                    <p className="text-xs font-semibold text-foreground/70">{opt.label}</p>
                   </div>
                 ))}
               </div>
+              <p className="text-center text-xs text-muted-foreground mt-2">All options are fully customizable</p>
             </motion.div>
 
-            {/* Details Section */}
+            {/* Details */}
             <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="flex flex-col">
-              {/* Category Badge */}
-              <div className="inline-flex w-fit items-center gap-2 mb-4 px-3 py-1.5 bg-secondary rounded-full">
-                <span className="text-sm font-semibold text-accent">{product.subcategory}</span>
+              <Link to={`/category/${category.id}`} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent transition-colors mb-4 w-fit">
+                <ChevronLeft size={15} /> Back to {category.name}
+              </Link>
+
+              {/* Category badge */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xl">{category.icon}</span>
+                <span className="badge-pill bg-accent/10 text-accent text-xs">{category.name}</span>
               </div>
 
-              {/* Title */}
-              <h1 className="font-serif text-3xl sm:text-4xl mb-3 text-foreground">{product.name}</h1>
-
-              {/* Description */}
-              <p className="text-muted-foreground text-lg mb-6">{product.description}</p>
+              <h1 className="font-serif text-3xl sm:text-4xl mb-3">{product.name}</h1>
+              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed mb-6">{product.description}</p>
 
               {/* Price & MOQ */}
-              <div className="bg-cream rounded-lg p-6 mb-8">
-                <div className="grid grid-cols-2 gap-6">
+              <div className="bg-white rounded-2xl p-5 sm:p-6 mb-6 border border-border/50 shadow-sm">
+                <div className="grid grid-cols-2 gap-5">
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Price per piece</p>
-                    <p className="text-2xl sm:text-3xl font-semibold text-accent">{product.price}</p>
+                    <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">Price per piece</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-accent">{product.price}</p>
+                    <p className="text-xs text-muted-foreground mt-1">*Price varies with quantity & customization</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-1">Minimum Order</p>
-                    <p className="text-2xl sm:text-3xl font-semibold">{product.moq.toLocaleString()} pcs</p>
+                    <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">Min. Order Qty</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-foreground">{product.moq.toLocaleString()} pcs</p>
+                    <p className="text-xs text-muted-foreground mt-1">Bulk discounts available</p>
                   </div>
                 </div>
               </div>
 
               {/* Highlights */}
-              <div className="space-y-2 mb-8">
+              <div className="space-y-2 mb-6">
                 {product.customizable && (
-                  <div className="flex items-center gap-2 text-green-600">
-                    <Check size={20} />
-                    <span className="font-medium">Fully Customizable (Size, Color, Print, Design)</span>
+                  <div className="flex items-center gap-2 text-green-700 text-sm">
+                    <Check size={17} className="shrink-0" />
+                    <span className="font-medium">Fully Customizable — size, color, print, handles</span>
                   </div>
                 )}
-                <div className="flex items-center gap-2 text-blue-600">
-                  <AlertCircle size={20} />
-                  <span className="font-medium">Bulk Order Discount Available</span>
+                <div className="flex items-center gap-2 text-blue-700 text-sm">
+                  <Check size={17} className="shrink-0" />
+                  <span className="font-medium">Bulk order discounts available</span>
+                </div>
+                <div className="flex items-center gap-2 text-amber-700 text-sm">
+                  <Check size={17} className="shrink-0" />
+                  <span className="font-medium">Pan India shipping — delivery in 7–15 days</span>
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+              {/* CTAs */}
+              <div className="flex flex-col gap-3 mt-auto">
                 <a
-                  href={whatsappLink}
+                  href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white px-6 py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
+                  className="flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-4 rounded-xl font-semibold text-base transition-colors shadow-lg"
                 >
-                  <MessageCircle size={20} />
-                  Get Quote on WhatsApp
+                  <MessageCircle size={20} /> Get Quote on WhatsApp
                 </a>
-                <Link
-                  to="/contact"
-                  className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-                >
-                  Contact Form
-                </Link>
+                <div className="grid grid-cols-2 gap-3">
+                  <Link
+                    to="/contact"
+                    className="flex items-center justify-center gap-2 border-2 border-accent text-accent hover:bg-accent hover:text-white py-3 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    Inquiry Form
+                  </Link>
+                  <a
+                    href="tel:+919368400659"
+                    className="flex items-center justify-center gap-2 border-2 border-border text-foreground hover:bg-secondary py-3 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    <Phone size={15} /> Call Now
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Specifications Table */}
-      <section className="py-12 sm:py-20 bg-cream">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-          <h2 className="font-serif text-2xl sm:text-3xl mb-8">Specifications</h2>
-          <div className="overflow-x-auto">
+      {/* Specifications */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="font-serif text-2xl sm:text-3xl mb-6">Product Specifications</h2>
+          <div className="bg-[hsl(var(--cream))] rounded-2xl overflow-hidden border border-border/50">
             <table className="w-full">
               <tbody className="divide-y divide-border">
-                {product.specs.material && (
-                  <tr className="hover:bg-background/50 transition-colors">
-                    <td className="py-4 px-4 font-semibold text-foreground">Material</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.material}</td>
+                {specRows.map(({ label, value }) => (
+                  <tr key={label} className="hover:bg-white/50 transition-colors">
+                    <td className="py-4 px-5 sm:px-6 font-semibold text-sm text-foreground w-40 sm:w-52">{label}</td>
+                    <td className="py-4 px-5 sm:px-6 text-sm text-muted-foreground">{value}</td>
                   </tr>
-                )}
-                {product.specs.gsm && (
-                  <tr className="hover:bg-background/50 transition-colors">
-                    <td className="py-4 px-4 font-semibold text-foreground">GSM</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.gsm}</td>
-                  </tr>
-                )}
-                {product.specs.sizes && (
-                  <tr className="hover:bg-background/50 transition-colors">
-                    <td className="py-4 px-4 font-semibold text-foreground">Available Sizes</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.sizes.join(", ")}</td>
-                  </tr>
-                )}
-                {product.specs.loadCapacity && (
-                  <tr className="hover:bg-background/50 transition-colors">
-                    <td className="py-4 px-4 font-semibold text-foreground">Load Capacity</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.loadCapacity}</td>
-                  </tr>
-                )}
-                {product.specs.handles && (
-                  <tr className="hover:bg-background/50 transition-colors">
-                    <td className="py-4 px-4 font-semibold text-foreground">Handle Types</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.handles.join(", ")}</td>
-                  </tr>
-                )}
+                ))}
+                <tr className="hover:bg-white/50 transition-colors">
+                  <td className="py-4 px-5 sm:px-6 font-semibold text-sm text-foreground w-40 sm:w-52">Customizable</td>
+                  <td className="py-4 px-5 sm:px-6 text-sm text-green-600 font-medium">
+                    {product.customizable ? "✓ Yes — size, print, color, handles" : "No"}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </section>
 
-      {/* Customization Options */}
-      <section className="py-12 sm:py-20">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-          <h2 className="font-serif text-2xl sm:text-3xl mb-8">Customization Options</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {[
-              { icon: "📏", label: "Size", desc: "Customize bag dimensions" },
-              { icon: "🎨", label: "Color", desc: "Choose from 50+ colors" },
-              { icon: "🖨️", label: "Print", desc: "Full color digital/screen print" },
-              { icon: "🔗", label: "Handles", desc: "Various handle options" },
-            ].map((opt) => (
-              <div key={opt.label} className="bg-card rounded-lg p-6 text-center border border-border hover:border-accent transition-colors">
-                <div className="text-4xl mb-3">{opt.icon}</div>
-                <h3 className="font-semibold text-lg mb-1">{opt.label}</h3>
-                <p className="text-muted-foreground text-sm">{opt.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Section */}
-      <section className="py-12 sm:py-20 bg-earth text-earth-foreground">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <SectionHeading title="Why Order From Us" subtitle="" />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8">
-            <div>
-              <div className="text-4xl mb-3">✓</div>
-              <h3 className="font-semibold mb-2">Direct Manufacturer</h3>
-              <p className="text-earth-foreground/70">No middlemen, lowest wholesale prices guaranteed</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-3">🚚</div>
-              <h3 className="font-semibold mb-2">Pan India Delivery</h3>
-              <p className="text-earth-foreground/70">Fast & reliable shipping to all cities</p>
-            </div>
-            <div>
-              <div className="text-4xl mb-3">🎯</div>
-              <h3 className="font-semibold mb-2">Quality Assured</h3>
-              <p className="text-earth-foreground/70">Premium materials, strict QC process</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Final */}
-      <section className="py-12 sm:py-20 bg-cream">
-        <div className="container mx-auto px-3 sm:px-4 lg:px-8 text-center">
-          <h2 className="font-serif text-2xl sm:text-3xl mb-4">Ready to Order?</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-            Get a custom quote for {product.name} with your specific requirements. Minimum order: {product.moq.toLocaleString()} pieces.
+      {/* Final CTA */}
+      <section className="py-12 sm:py-16 bg-[hsl(var(--earth))] text-white text-center">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="font-serif text-2xl sm:text-3xl mb-3">Ready to Order {product.name}?</h2>
+          <p className="text-white/65 text-sm sm:text-base max-w-lg mx-auto mb-8">
+            Min order: {product.moq.toLocaleString()} pieces. Custom sizes and prints available. Contact us for bulk pricing.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href={whatsappLink}
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
+              className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white px-8 py-3.5 rounded-xl font-semibold transition-colors"
             >
-              <MessageCircle size={20} />
-              Get Quote
+              <MessageCircle size={18} /> WhatsApp Quote
             </a>
             <Link
-              to="/products"
-              className="px-8 py-3.5 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-lg font-semibold transition-colors"
+              to={`/category/${category.id}`}
+              className="flex items-center justify-center gap-2 border-2 border-white/30 text-white hover:bg-white/10 px-8 py-3.5 rounded-xl font-semibold transition-colors"
             >
-              Browse More Products
+              More {category.name}
             </Link>
           </div>
         </div>
