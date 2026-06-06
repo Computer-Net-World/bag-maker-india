@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Phone, X } from "lucide-react";
 
 const messages = [
-  "🎉 Free design consultation for orders above 2000 pcs",
+  "🎉 Free design consultation for orders above 1000 pcs",
   "🚚 Pan India delivery — order today, ship in 7–15 days",
   "📞 Call us: +91 93684 00659 | Mon–Sat 9 AM – 7 PM",
   "💍 Wedding season special — custom bags from ₹5/piece",

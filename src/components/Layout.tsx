@@ -5,6 +5,8 @@ import Footer from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
 import ScrollProgress from "./ScrollProgress";
 import AnnouncementBar from "./AnnouncementBar";
+import QuickInquiry from "./QuickInquiry";
+import BackToTop from "./BackToTop";
 
 // Scroll to top whenever route changes
 const ScrollToTop = () => {
@@ -21,12 +23,16 @@ const Layout = ({ children }: { children: ReactNode }) => (
     <ScrollToTop />
     <AnnouncementBar />
     <Navbar />
-    {/* pt-16 accounts for the fixed navbar (announcement bar height adds dynamically) */}
+    {/* pt-16 accounts for the fixed navbar height */}
     <main className="flex-1 w-full pt-16">
       {children}
     </main>
     <Footer />
+
+    {/* Floating widgets — stacked right side */}
     <WhatsAppButton />
+    <QuickInquiry />
+    <BackToTop />
   </div>
 );
 

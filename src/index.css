@@ -127,6 +127,57 @@ html { scroll-behavior: smooth; }
   to { transform: rotate(360deg); }
 }
 
+/* Infinite horizontal marquee */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Subtle hero image zoom */
+@keyframes subtle-zoom {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+
+/* ── Range Input Cross-Browser ────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: hsl(var(--accent));
+  border: 3px solid white;
+  box-shadow: 0 1px 4px hsl(0 0% 0% / 0.2);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: hsl(var(--accent));
+  border: 3px solid white;
+  box-shadow: 0 1px 4px hsl(0 0% 0% / 0.2);
+  cursor: pointer;
+  border: none;
+}
+
+
 /* ── Utility Classes ───────────────────────────────────────────────────────── */
 @layer utilities {
 

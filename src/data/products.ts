@@ -54,7 +54,7 @@ export const mainCategories: MainCategory[] = [
     id: "wedding",
     name: "Wedding Bags",
     tagline: "Make every celebration memorable",
-    icon: "💍",
+    icon: "",
     image: weddingBagsImg,
     description: "Premium customized bags for weddings and all special occasions",
     longDescription:
@@ -81,7 +81,7 @@ export const mainCategories: MainCategory[] = [
       },
       {
         id: "wedding-welcome",
-        name: "Welcome Bags",
+        name: "Hamper Bags",
         image: weddingWelcomeImg,
         description: "Premium welcome bags for wedding guests — first impressions matter",
         specs: {
@@ -138,7 +138,7 @@ export const mainCategories: MainCategory[] = [
     id: "sweet",
     name: "Sweet (Mithai) Bags",
     tagline: "Sweeten every occasion",
-    icon: "🍬",
+    icon: "",
     image: sweetBagsImg,
     description: "Hygienic food-grade bags for sweet shops, bakeries and mithai stores",
     longDescription:
@@ -184,7 +184,7 @@ export const mainCategories: MainCategory[] = [
       },
       {
         id: "sweet-two-kg",
-        name: "2 Kg Sweet Bag",
+        name: "5 Kg Sweet Bag",
         image: sweetBagsImg,
         description: "Larger bags for 2 kg of sweets — ideal for festival gifting",
         specs: {
@@ -208,7 +208,7 @@ export const mainCategories: MainCategory[] = [
     id: "garment",
     name: "Garment Bags",
     tagline: "Dress your brand in style",
-    icon: "👗",
+    icon: "",
     image: garmentBagsImg,
     description: "Stylish carry bags for boutiques, clothing stores, and fashion brands",
     longDescription:
@@ -252,7 +252,7 @@ export const mainCategories: MainCategory[] = [
       },
       {
         id: "garment-premium-brand",
-        name: "Premium Brand Bags",
+        name: "Shoes Bags",
         image: garmentBagsImg,
         description: "High-end bags with foil stamping, embossing, and premium finish",
         specs: {
@@ -275,7 +275,7 @@ export const mainCategories: MainCategory[] = [
     id: "jute",
     name: "Jute Bags",
     tagline: "Eco-friendly and built to last",
-    icon: "🌾",
+    icon: "",
     image: juteBagsImg,
     description: "Natural, biodegradable jute bags for corporate gifting and events",
     longDescription:
@@ -319,7 +319,7 @@ export const mainCategories: MainCategory[] = [
       },
       {
         id: "jute-promotional",
-        name: "Promotional Jute Bags",
+        name: "Jute Hamper",
         image: juteBagsImg,
         description: "Cost-effective jute bags for events and corporate giveaways",
         specs: {
@@ -359,7 +359,7 @@ export const mainCategories: MainCategory[] = [
     id: "saree",
     name: "Saree Cover",
     tagline: "Protect your precious sarees in style",
-    icon: "🥻",
+    icon: "",
     image: sareeCoverImg,
     description: "Non-woven and fabric saree covers for retail, gifting, and storage",
     longDescription:
@@ -423,7 +423,7 @@ export const mainCategories: MainCategory[] = [
     id: "non-woven",
     name: "Non-Woven Bags",
     tagline: "Durable reusable bags for all retail needs",
-    icon: "📦",
+    icon: "",
     image: nonwovenBagsImg,
     description: "Bulk non-woven carry bags — D Cut, U Cut, and Loop Handle varieties",
     longDescription:
